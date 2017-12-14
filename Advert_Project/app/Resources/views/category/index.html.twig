@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Categories list</h1>
+
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ path('advert_category_delete', { 'id': category.id }) }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('category_new') }}" class="btn btn-info">Create a new category</a>
+{% endblock %}
