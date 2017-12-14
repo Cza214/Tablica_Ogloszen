@@ -29,12 +29,6 @@ class Category
     private $name;
 
     /**
-     * @var
-     *
-     * @ORM\OneToMany(targetEntity="Advert", mappedBy="categories")
-     */
-    private $advert;
-    /**
      * Get id
      *
      * @return int
@@ -66,46 +60,5 @@ class Category
     public function getName()
     {
         return $this->name;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->advert = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add advert
-     *
-     * @param \AdvertBundle\Entity\Advert $advert
-     *
-     * @return Category
-     */
-    public function addAdvert(\AdvertBundle\Entity\Advert $advert)
-    {
-        $this->advert[] = $advert;
-
-        return $this;
-    }
-
-    /**
-     * Remove advert
-     *
-     * @param \AdvertBundle\Entity\Advert $advert
-     */
-    public function removeAdvert(\AdvertBundle\Entity\Advert $advert)
-    {
-        $this->advert->removeElement($advert);
-    }
-
-    /**
-     * Get advert
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAdvert()
-    {
-        return $this->advert;
     }
 }

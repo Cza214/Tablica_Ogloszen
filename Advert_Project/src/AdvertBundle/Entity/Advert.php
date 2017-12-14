@@ -52,10 +52,18 @@ class Advert
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="advert")
+     * @ORM\OneToOne(targetEntity="Category")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
-    private $categories;
+    private $category;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="adverts")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
     /**
      * Get id
      *
@@ -139,29 +147,6 @@ class Advert
     }
 
     /**
-     * Set categories
-     *
-     * @param \AdvertBundle\Entity\Category $categories
-     *
-     * @return Advert
-     */
-    public function setCategories(\AdvertBundle\Entity\Category $categories = null)
-    {
-        $this->categories = $categories;
-
-        return $this;
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \AdvertBundle\Entity\Category
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-    /**
      * Constructor
      */
     public function __construct()
@@ -201,5 +186,53 @@ class Advert
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AdvertBundle\Entity\Category $category
+     *
+     * @return Advert
+     */
+    public function setCategory(\AdvertBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AdvertBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AdvertBundle\Entity\User $user
+     *
+     * @return Advert
+     */
+    public function setUser(\AdvertBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AdvertBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
