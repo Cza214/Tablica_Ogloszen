@@ -3,6 +3,8 @@
 namespace AdvertBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use function Sodium\add;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Advert
@@ -52,7 +54,7 @@ class Advert
     /**
      * @var
      *
-     * @ORM\OneToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Category")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
@@ -146,12 +148,19 @@ class Advert
         return $this->endDate;
     }
 
+    public function __toString()
+    {
+        return $this->category;
+    }
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $current = new \DateTime();
+        $this->endDate = $current->add(new \DateInterval('P10D'));
     }
 
     /**
