@@ -1,11 +1,12 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+<div class="row">
+<a href="{{ path('advert_default_showbyuser') }}" class="btn btn-info">Adverts</a>
 {% if is_granted('ROLE_ADMIN') %}
-    <div class="row">
-        <a href="" class="btn btn-info">Adverts</a>
         <a href="{{ path('category_index') }}" class="btn btn-secondary">Categories</a>
-    </div>
 {% endif %}
+</div>
+
 <div class="fos_user_user_show">
     <p>{{ 'User'|trans }}: {{ user.username }}</p>
     <p>{{ 'Email'|trans }}: {{ user.email }}</p>
