@@ -3,18 +3,6 @@
 {% block content %}
         <a class="btn btn-info" href="{{ path('advert_new') }}" style="width: 100%">Create a new advert</a>
         {% for advert in adverts %}
-            <div class="row" style="margin: 10px; padding: 5px;">
-                <div class="col-md-6">
-                    <a href="#">
-                        <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/550x200" alt="">
-                    </a>
-                </div>
-                <div class="col-md-5">
-                    <span class="small float-right" style="padding: 5px;">{% if advert.category is not null %}{{ advert.category.name }}{% endif %}</span>
-                    <h3>{{ advert.title }}</h3>
-                    <p>{{ advert.description }}</p>
-                    <a class="btn btn-primary btn-sm" href="{{ path('advert_show',{'id':advert.id}) }}">View Advert</a>
-                </div>
-            </div>
+            {{ include('advert/advert_content.html.twig',{'advert':advert}) }}
         {% endfor %}
 {% endblock %}

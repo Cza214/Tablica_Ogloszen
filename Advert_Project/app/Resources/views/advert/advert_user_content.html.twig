@@ -1,0 +1,21 @@
+{% extends('base.html.twig') %}
+
+{% block content %}
+    <table class="table table-sm">
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Options</th>
+        </tr>
+        {% for advert in adverts %}
+            <tr>
+                <td>{{ advert.title }}</td>
+                <td>{% if advert.category is not null %}{{ advert.category.name }}{% else %}No Category{% endif %}</td>
+                <td>
+                    <a href="{{ path('advert_delete',{'id':advert.id}) }}" class="btn btn-warning btn-sm">Delete</a>
+                    <a href="{{ path('advert_edit',{'id':advert.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
