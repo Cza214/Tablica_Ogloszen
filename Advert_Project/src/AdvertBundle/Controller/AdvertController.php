@@ -71,10 +71,12 @@ class AdvertController extends Controller
     public function showAction(Advert $advert)
     {
         $deleteForm = $this->createDeleteForm($advert);
+        $comments = $this->getCommentsByAdvert($advert);
 
         return $this->render('advert/show.html.twig', array(
             'advert' => $advert,
             'delete_form' => $deleteForm->createView(),
+            'comments' => $comments
         ));
     }
 
@@ -137,5 +139,22 @@ class AdvertController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Return all comments by the advert
+     *
+     * @param Advert $advert
+     * @return array
+     */
+    protected function getCommentsByAdvert(Advert $advert){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $comments = $em->getRepository('AdvertBundle:Comment')->findBy([
+            'advert' => $advert
+        ]);
+
+        return $comments;
     }
 }

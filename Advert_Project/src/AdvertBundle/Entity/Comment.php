@@ -43,6 +43,11 @@ class Comment
      */
     private $advert;
 
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
     /**
      * Get id
      *

@@ -32,7 +32,7 @@ class DefaultController extends Controller
             'user' => $this->getUser()
         ]);
 
-        return $this->render('advert/advert_content.html.twig', array(
+        return $this->render('advert/advert_user_content.html.twig', array(
             'adverts' => $adverts,
         ));
     }
