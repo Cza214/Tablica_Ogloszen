@@ -27,12 +27,35 @@ class AdvertController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $adverts = $em->getRepository('AdvertBundle:Advert')->findAll();
+        $categories = $this->getAllCategories();
 
         return $this->render('advert/index.html.twig', array(
             'adverts' => $adverts,
+            'categories' => $categories
         ));
     }
 
+    /**
+     * @Route("/category", name="advert_category")
+     * @Method("GET")
+     */
+    public function byCategoryAction(Request $req){
+        $category_id = $req->query->get('category');
+
+        $em = $this->getDoctrine()->getManager();
+
+        if($category_id == 'null'){
+            return $this->redirectToRoute('advert_index');
+        }
+        $category = $em->getRepository('AdvertBundle:Category')->find($category_id);
+        $adverts = $em->getRepository('AdvertBundle:Advert')->findBy(['category' => $category]);
+        $categories = $this->getAllCategories();
+
+        return $this->render('advert/index.html.twig', array(
+            'adverts' => $adverts,
+            'categories' => $categories
+        ));
+    }
     /**
      * Creates a new advert entity.
      *
@@ -156,5 +179,20 @@ class AdvertController extends Controller
         ]);
 
         return $comments;
+    }
+
+    /**
+     * Return all categories
+     *
+     * @return array
+     *
+     */
+    protected function getAllCategories(){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $categories = $em->getRepository('AdvertBundle:Category')->findAll();
+
+        return $categories;
     }
 }

@@ -1,8 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-        <a class="btn btn-info" href="{{ path('advert_new') }}" style="width: 100%">Create a new advert</a>
+    <div class="row">
+        <form action="{{ path('advert_category') }}" method="get">
+            <select name="category">
+                <option value="null">All</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Find">
+        </form>
+    </div>
         {% for advert in adverts %}
             {{ include('advert/advert_content.html.twig',{'advert':advert}) }}
         {% endfor %}
+    <a class="btn btn-info" href="{{ path('advert_new') }}" style="width: 100%">Create a new advert</a>
 {% endblock %}
